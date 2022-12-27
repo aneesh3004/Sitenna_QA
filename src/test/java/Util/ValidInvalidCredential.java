@@ -14,7 +14,7 @@ public class ValidInvalidCredential {
 		Pattern pat = Pattern.compile(EmailRegex);
 		result = pat.matcher(Email).matches();
 		System.out.println(result);
-		String PasswordRegex = "^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[_@#$%]).(8,20)$";
+		String PasswordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[_@#$%^&+=])(?=\\S+$).(8,)$";
 		Pattern p = Pattern.compile(PasswordRegex);
 		res = p.matcher(Password).matches();
 		System.out.println(res);
