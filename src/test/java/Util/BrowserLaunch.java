@@ -8,6 +8,7 @@ public class BrowserLaunch {
 
 	public WebDriver driver;
 
+	// Method to launch browser
 	public void browserlaunch() {
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
