@@ -2,6 +2,7 @@ package StepDefinitions;
 
 import Pages.LoginPage;
 import Util.BrowserLaunch;
+import Util.ValidInvalidCredential;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -11,6 +12,7 @@ public class LoginSteps {
 
 	LoginPage login;
 	BrowserLaunch launchbrowser;
+	ValidInvalidCredential validatecredentials;
 
 	// Code to launch the browser
 	@Given("^user launches a browser$")
@@ -46,12 +48,13 @@ public class LoginSteps {
 
 	@Then("^check (.+) and (.+) entered are valid or not$")
 	public void check_and_entered_are_valid_or_not(String Email, String Password) {
-		login.isCredentialValidInvalid(Email, Password);
+		validatecredentials = new ValidInvalidCredential();
+		validatecredentials.isCredentialValidInvalid(Email, Password);
 	}
 
 	@Given("^credentials entered are valid$")
 	public void credentials_entered_are_valid() {
-		login.isCredentialValid();
+		validatecredentials.isCredentialValid();
 	}
 
 	@Then("^login success message should be displayed$")
@@ -73,7 +76,7 @@ public class LoginSteps {
 
 	@Given("^credentials entered are invalid$")
 	public void credentials_entered_are_invalid() {
-		login.isCredentialInvalid();
+		validatecredentials.isCredentialInvalid();
 	}
 
 	@Then("^login error message should be displayed$")

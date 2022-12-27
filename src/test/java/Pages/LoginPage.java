@@ -1,7 +1,5 @@
 package Pages;
 
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,8 +7,6 @@ import org.openqa.selenium.WebDriver;
 public class LoginPage {
 
 	WebDriver driver;
-	boolean result;
-	boolean res;
 
 	By login_Email = By.id("login_email");
 	By login_Password = By.id("login_password");
@@ -38,32 +34,6 @@ public class LoginPage {
 	// Method to click on login button
 	public void clickLogin() {
 		driver.findElement(login_btn).click();
-	}
-
-	// Method to check credentials are valid or not
-	public void isCredentialValidInvalid(String Email, String Password) throws PatternSyntaxException {
-		String EmailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-		Pattern pat = Pattern.compile(EmailRegex);
-		result = pat.matcher(Email).matches();
-		System.out.println(result);
-		String PasswordRegex = "^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[_@#$%]).(8,20)$";
-		Pattern p = Pattern.compile(PasswordRegex);
-		res = p.matcher(Password).matches();
-		System.out.println(res);
-	}
-
-	// Method to check credentials are valid
-	public void isCredentialValid() {
-		if (result == true && res == true) {
-			System.out.println("Credentials are valid");
-		}
-	}
-
-	// Method to check credentials are invalid
-	public void isCredentialInvalid() {
-		if (result == false && res == false) {
-			System.out.println("Credentials are invalid");
-		}
 	}
 
 	// Method to print login success message
