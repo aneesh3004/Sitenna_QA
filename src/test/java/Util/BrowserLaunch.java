@@ -9,9 +9,13 @@ public class BrowserLaunch {
 	public WebDriver driver;
 
 	// Method to launch browser
-	public void browserlaunch() {
-		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
+	public WebDriver browserlaunch() {
+		if (driver == null) {
+			WebDriverManager.chromedriver().setup();
+			driver = new ChromeDriver();
+			driver.manage().window().maximize();
+
+		}
+		return driver;
 	}
 }

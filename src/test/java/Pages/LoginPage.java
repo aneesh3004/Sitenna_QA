@@ -17,7 +17,22 @@ public class LoginPage {
 
 	// Constructor to initialize driver
 	public LoginPage(WebDriver driver) {
+		System.out.println("Driver: " + driver);
 		this.driver = driver;
+	}
+
+	// Method to check user is on login page or not
+	public String validateloginpage() {
+		String ActualURL = driver.getCurrentUrl();
+		String ExpectedURL = "https://qa.sitenna.com/#/auth/signin";
+		try {
+			Assert.assertEquals(ExpectedURL, ActualURL);
+			System.out.println("User is on login page");
+		} catch (AssertionError e) {
+			System.out.println(e.getMessage());
+			System.out.println("User is not on login page");
+		}
+		return ActualURL;
 	}
 
 	// Method to enter the email id
@@ -70,4 +85,5 @@ public class LoginPage {
 		driver.close();
 		driver.quit();
 	}
+
 }
