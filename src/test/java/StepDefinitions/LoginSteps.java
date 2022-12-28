@@ -10,8 +10,8 @@ import io.cucumber.java.en.When;
 
 public class LoginSteps {
 
-	LoginPage login;
 	BrowserLaunch launchbrowser;
+	LoginPage login;
 	ValidInvalidCredential validatecredentials;
 
 	// Code to launch the browser
@@ -23,17 +23,19 @@ public class LoginSteps {
 	}
 
 	// Code to enter the URL & go on to the login page
-	@And("^enters the URL address and is on login page$")
-	public void enters_the_URL_address_and_is_on_login_page() throws InterruptedException {
+	@And("^enters the URL address and check if the user is on login page$")
+	public void enters_the_url_address_and_check_if_the_user_is_on_login_page() throws InterruptedException {
 		String URL = "https://qa.sitenna.com";
 		launchbrowser.driver.get(URL);
+		login = new LoginPage(launchbrowser.driver);
+		login.validateloginpage();
 		Thread.sleep(2000);
 	}
 
 	// Code to enter email id & password
 	@When("^user enters (.+) and (.+)$")
 	public void user_enters_Email_and_Password(String Email, String Password) throws InterruptedException {
-		login = new LoginPage(launchbrowser.driver);
+
 		login.enterEmail(Email);
 		login.enterPassword(Password);
 		Thread.sleep(3000);

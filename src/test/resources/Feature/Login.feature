@@ -2,7 +2,7 @@ Feature: To test the login functionality
 
   Scenario Outline: Login with valid credentials
     Given user launches a browser
-    And enters the URL address and is on login page
+    And enters the URL address and check if the user is on login page
     When user enters <Email> and <Password>
     And clicks on login button
     Then check <Email> and <Password> entered are valid or not
@@ -17,7 +17,7 @@ Feature: To test the login functionality
 
   Scenario Outline: Login with invalid credentials
     Given user launches a browser
-    And enters the URL address and is on login page
+    And enters the URL address and check if the user is on login page
     When user enters <Email> and <Password>
     And clicks on login button
     Then check <Email> and <Password> entered are valid or not
