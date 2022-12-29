@@ -1,5 +1,7 @@
 package StepDefinitions;
 
+import Pages.ForgotPasswordPage;
+import Pages.LoginPage;
 import Util.BrowserLaunch;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -9,6 +11,7 @@ import io.cucumber.java.en.When;
 public class ForgotPasswordSteps {
 
 	BrowserLaunch launchbrowser;
+	ForgotPasswordPage forgotpassword;
 
 	@Given("^user launches a browser$")
 	public void user_launches_a_browser() throws InterruptedException {
@@ -42,11 +45,16 @@ public class ForgotPasswordSteps {
 
 	}
 
-	@And("^enters the URL address and check if the user is on login page$")
-	public void enters_the_url_address_and_check_if_the_user_is_on_login_page() {
-
-	}
-
+	// Code to enter the URL & go on to the login page
+		@And("^enters the URL address and check if the user is on login page$")
+		public void enters_the_url_address_and_check_if_the_user_is_on_login_page() throws InterruptedException {
+			String URL = "https://qa.sitenna.com";
+			launchbrowser.driver.get(URL);
+			forgotpassword = new ForgotPasswordPage(launchbrowser.driver);
+			forgotpassword.validateloginpage();
+			Thread.sleep(2000);
+		}
+		
 	@And("^clicks on Reset Password button$")
 	public void clicks_on_reset_password_button() {
 
