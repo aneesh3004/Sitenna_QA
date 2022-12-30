@@ -3,6 +3,7 @@ package StepDefinitions;
 import Pages.LoginPage;
 import Util.BrowserLaunch;
 import Util.ValidInvalidCredential;
+import Util.ValidateLoginPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -13,6 +14,7 @@ public class LoginSteps {
 	BrowserLaunch launchbrowser;
 	LoginPage login;
 	ValidInvalidCredential validatecredentials;
+	ValidateLoginPage validateloginpage;
 
 	// Code to launch the browser
 	@Given("^user launches a browser$")
@@ -28,14 +30,14 @@ public class LoginSteps {
 		String URL = "https://qa.sitenna.com";
 		launchbrowser.driver.get(URL);
 		login = new LoginPage(launchbrowser.driver);
-		login.validateloginpage();
+		validateloginpage = new ValidateLoginPage();
+		validateloginpage.validateloginpage();
 		Thread.sleep(2000);
 	}
 
 	// Code to enter email id & password
 	@When("^user enters (.+) and (.+)$")
 	public void user_enters_Email_and_Password(String Email, String Password) throws InterruptedException {
-
 		login.enterEmail(Email);
 		login.enterPassword(Password);
 		Thread.sleep(3000);
