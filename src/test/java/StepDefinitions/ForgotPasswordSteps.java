@@ -1,5 +1,7 @@
 package StepDefinitions;
 
+import org.openqa.selenium.WebDriver;
+
 import Pages.ForgotPasswordPage;
 import Util.BrowserLaunch;
 import Util.ValidateLoginPage;
@@ -13,6 +15,8 @@ public class ForgotPasswordSteps {
 	BrowserLaunch launchbrowser;
 	ForgotPasswordPage forgotpassword;
 	ValidateLoginPage validateloginpage;
+	
+	WebDriver driver;
 
 	@Given("^browser is launched$")
 	public void browser_is_launched() throws InterruptedException {
@@ -54,12 +58,12 @@ public class ForgotPasswordSteps {
 
 	// Code to enter the URL & go on to the login page
 	@And("^URL address is entered and checked if the user is on login page$")
-	public void url_address_is_entered_and_checked_if_the_user_is_on_login_page() throws InterruptedException {
+	public void url_address_is_entered_and_checked_if_the_user_is_on_login_page(WebDriver WebDriver) throws InterruptedException {
 		String URL = "https://qa.sitenna.com";
 		launchbrowser.driver.get(URL);
 		forgotpassword = new ForgotPasswordPage(launchbrowser.driver);
 		validateloginpage = new ValidateLoginPage();
-		validateloginpage.validateloginpage();
+		validateloginpage.validateloginpage(WebDriver);
 		Thread.sleep(2000);
 	}
 
@@ -74,7 +78,7 @@ public class ForgotPasswordSteps {
 	}
 
 	@And("^user is on login page$")
-	public void user_is_on_login_page() {
-		validateloginpage.validateloginpage();
+	public void user_is_on_login_page(WebDriver WebDriver) {
+		validateloginpage.validateloginpage(WebDriver);
 	}
 }
