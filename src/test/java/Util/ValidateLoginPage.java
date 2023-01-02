@@ -18,5 +18,5 @@ public class ValidateLoginPage {
 			System.out.println("User is not on login page");
 		}
 		return ActualURL;
-	}	
+	}
 }
