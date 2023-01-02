@@ -18,6 +18,6 @@ Feature: To test the forgot password functionality
       | vyas.aneesh@gmail.com |
 
     Examples: 
-      | Create New Password   | Repeat New Password   |
-      | Password@1981         | Password@198          |
-      | Password@1981         | Password@1981         |
+      | Create New Password | Repeat New Password |
+      | Password@1981       | Password@198        |
+      | Password@1981       | Password@1981       |

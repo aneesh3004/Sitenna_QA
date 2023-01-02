@@ -6,18 +6,17 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPage {
 
-	WebDriver driver;
+	public WebDriver driver;
 
 	By login_Email = By.id("login_email");
 	By login_Password = By.id("login_password");
 	By login_btn = By.id("login_button");
 	By loginsuccessmessage = By.xpath("//notifier-container[@class = 'notifier__container']");
-	By dashboard = By.id("dashboard_menu_item");
+	By dashboard = By.xpath("//*[@id=\"dashboard_menu_item\"]");
 	By loginerrormessage = By.xpath("//notifier-container[@class = 'notifier__container']");
 
 	// Constructor to initialize driver
 	public LoginPage(WebDriver driver) {
-		System.out.println("Driver: " + driver);
 		this.driver = driver;
 	}
 
@@ -33,8 +32,9 @@ public class LoginPage {
 	}
 
 	// Method to click on login button
-	public void clickLogin() {
+	public void clickLogin() throws InterruptedException {
 		driver.findElement(login_btn).click();
+		Thread.sleep(5000);
 	}
 
 	// Method to print login success message

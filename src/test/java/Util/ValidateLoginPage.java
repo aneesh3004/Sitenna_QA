@@ -5,9 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 public class ValidateLoginPage {
 
-	public WebDriver driver;
-
-	public String validateloginpage() {
+	public String validateloginpage(WebDriver driver) {
 		String ActualURL = driver.getCurrentUrl();
 		String ExpectedURL = "https://qa.sitenna.com/#/auth/signin";
 		try {
@@ -18,5 +16,5 @@ public class ValidateLoginPage {
 			System.out.println("User is not on login page");
 		}
 		return ActualURL;
-	}	
+	}
 }

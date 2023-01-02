@@ -1,5 +1,8 @@
 package StepDefinitions;
 
+import org.openqa.selenium.WebDriver;
+
+import Pages.ForgotPasswordPage;
 import Pages.LoginPage;
 import Util.BrowserLaunch;
 import Util.ValidInvalidCredential;
@@ -16,6 +19,8 @@ public class LoginSteps {
 	ValidInvalidCredential validatecredentials;
 	ValidateLoginPage validateloginpage;
 
+	WebDriver driver;
+
 	// Code to launch the browser
 	@Given("^user launches a browser$")
 	public void user_launches_a_browser() throws InterruptedException {
@@ -26,12 +31,13 @@ public class LoginSteps {
 
 	// Code to enter the URL & go on to the login page
 	@And("^enters the URL address and check if the user is on login page$")
-	public void enters_the_url_address_and_check_if_the_user_is_on_login_page() throws InterruptedException {
+	public void url_address_is_entered_and_checked_if_the_user_is_on_login_page(/* WebDriver WebDriver */)
+			throws InterruptedException {
 		String URL = "https://qa.sitenna.com";
 		launchbrowser.driver.get(URL);
 		login = new LoginPage(launchbrowser.driver);
 		validateloginpage = new ValidateLoginPage();
-		validateloginpage.validateloginpage();
+		validateloginpage.validateloginpage(launchbrowser.driver);
 		Thread.sleep(2000);
 	}
 
@@ -62,8 +68,9 @@ public class LoginSteps {
 	}
 
 	@Then("^login success message should be displayed$")
-	public void login_success_message_should_be_displayed() {
+	public void login_success_message_should_be_displayed() throws InterruptedException {
 		login.loginsuccess();
+		Thread.sleep(3000);
 	}
 
 	@And("^user should be navigated to the dashboard$")
