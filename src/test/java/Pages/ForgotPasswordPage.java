@@ -16,7 +16,12 @@ public class ForgotPasswordPage {
 	By continue_btn = By.id("create_password_continue_button");
 	By passwordmatchsuccess = By.xpath("//notifier-container[@class = 'notifier__container']");
 	By passwordmismatcherror = By.xpath("//notifier-container[@class = 'notifier__container']");
+	By login_Email = By.id("login_email");
+	By login_Password = By.id("login_password");
 	By login_button = By.id("login_button");
+	By loginsuccessmessage = By.xpath("//notifier-container[@class = 'notifier__container']");
+	By dashboard = By.xpath("//*[@id=\"dashboard_menu_item\"]");
+	By checkmailsuccessmessage = By.xpath("//notifier-container[@class = 'notifier__container']");
 
 	// Constructor to initialize driver
 	public ForgotPasswordPage(WebDriver driver) {
@@ -106,4 +111,51 @@ public class ForgotPasswordPage {
 		}
 		return ActualText;
 	}
+
+	// Method for check mail success message
+	public String checkmailsuccess() {
+		String ActualText = driver.findElement(checkmailsuccessmessage).getText();
+		String ExpectedText = "Please check mail for reset password";
+		try {
+			Assert.assertEquals(ExpectedText, ActualText);
+		} catch (AssertionError e) {
+			System.out.println(e.getMessage());
+		}
+		return ActualText;
+	}
+
+	// Method to enter email and password
+	public void enterEmailPassword(String Email, String NewPassword) {
+		driver.findElement(login_Email).sendKeys(Email);
+		driver.findElement(login_Password).sendKeys(NewPassword);
+	}
+
+	public void clickLogin() throws InterruptedException {
+		driver.findElement(login_button).click();
+		Thread.sleep(5000);
+	}
+
+	// Method to print login success message
+	public String loginsuccess() {
+		String ActualText = driver.findElement(loginsuccessmessage).getText();
+		String ExpectedText = "login successful";
+		try {
+			Assert.assertEquals(ExpectedText, ActualText);
+		} catch (AssertionError e) {
+			System.out.println(e.getMessage());
+		}
+		return ActualText;
+	}
+
+	// Method to navigate on the dashboard
+	public void dashboardhighlighted() {
+		driver.findElement(dashboard).isSelected();
+	}
+
+	// Method to close the browser
+	public void browserclose() {
+		driver.close();
+		driver.quit();
+	}
+
 }
