@@ -11,9 +11,12 @@ public class LoginPage {
 	By login_Email = By.id("login_email");
 	By login_Password = By.id("login_password");
 	By login_btn = By.id("login_button");
-	By loginsuccessmessage = By.xpath("//notifier-container[@class = 'notifier__container']");
+	// By loginsuccessmessage = By.xpath("//notifier-container[@class =
+	// 'notifier__container']");
 	By dashboard = By.xpath("//*[@id=\"dashboard_menu_item\"]");
-	By loginerrormessage = By.xpath("//notifier-container[@class = 'notifier__container']");
+	// By loginerrormessage = By.xpath("//notifier-container[@class =
+	// 'notifier__container']");
+	By notifier = By.xpath("//notifier-container[@class = 'notifier__container']");
 
 	// Constructor to initialize driver
 	public LoginPage(WebDriver driver) {
@@ -28,7 +31,6 @@ public class LoginPage {
 	// Method to enter the password
 	public void enterPassword(String Password) {
 		driver.findElement(login_Password).sendKeys(Password);
-
 	}
 
 	// Method to click on login button
@@ -38,8 +40,8 @@ public class LoginPage {
 	}
 
 	// Method to print login success message
-	public String loginsuccess() {
-		String ActualText = driver.findElement(loginsuccessmessage).getText();
+	public String loginsuccess() throws InterruptedException {
+		String ActualText = driver.findElement(notifier).getText();
 		String ExpectedText = "login successful";
 		try {
 			Assert.assertEquals(ExpectedText, ActualText);
@@ -56,7 +58,7 @@ public class LoginPage {
 
 	// Method to print login error message
 	public String loginerror() {
-		String ActualText = driver.findElement(loginerrormessage).getText();
+		String ActualText = driver.findElement(notifier).getText();
 		String ExpectedText = "Invalid user login attempt.";
 		try {
 			Assert.assertEquals(ExpectedText, ActualText);
