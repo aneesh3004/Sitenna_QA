@@ -3,10 +3,11 @@ package Pages;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WindowType;
 
 public class ForgotPasswordPage {
 
-	WebDriver driver;
+	public WebDriver driver;
 
 	By forgotpassword_link = By.id("forgot_password");
 	By resetpassword_email = By.id("reset_password_email");
@@ -29,18 +30,18 @@ public class ForgotPasswordPage {
 	}
 
 	// Method to enter reset password email
-	public void resetpasswordemail(String Email) {
+	public void resetpasswordemail(String Email) throws InterruptedException {
 		driver.findElement(resetpassword_email).sendKeys(Email);
+		Thread.sleep(3000);
 	}
 
-	// Method to click forgot password link
-	public void forgotpasswordlink() {
+	// Method to click forgot password link and check user is on forgot password
+	// page or not
+	public String validateforgotpasswordpage() throws InterruptedException {
 		driver.findElement(forgotpassword_link).click();
-	}
-
-	// Method to check user is on forgot password page or not
-	public String validateforgotpasswordpage() {
+		Thread.sleep(3000);
 		String ActualURL = driver.getCurrentUrl();
+		System.out.println("Current URL is : " + ActualURL);
 		String ExpectedURL = "https://qa.sitenna.com/#/auth/forgot-password";
 		try {
 			Assert.assertEquals(ExpectedURL, ActualURL);
@@ -48,6 +49,7 @@ public class ForgotPasswordPage {
 		} catch (AssertionError e) {
 			System.out.println(e.getMessage());
 			System.out.println("User is not on forgot password page");
+			Thread.sleep(3000);
 		}
 		return ActualURL;
 	}
@@ -55,11 +57,6 @@ public class ForgotPasswordPage {
 	// Method to click on continue button
 	public void continuebutton() {
 		driver.findElement(continue_btn).click();
-	}
-
-	// Method to click on reset password button
-	public void resetpasswordbutton() {
-		driver.findElement(resetpassword_btn).click();
 	}
 
 	// Method to enter new password & repeat new password
@@ -113,13 +110,17 @@ public class ForgotPasswordPage {
 	}
 
 	// Method for check mail success message
-	public String checkmailsuccess() {
+	public String checkmailsuccess() throws InterruptedException {
+		driver.findElement(resetpassword_btn).click();
+		Thread.sleep(3000);
 		String ActualText = driver.findElement(checkmailsuccessmessage).getText();
+		System.out.println("Message: " + ActualText);
 		String ExpectedText = "Please check mail for reset password";
 		try {
 			Assert.assertEquals(ExpectedText, ActualText);
 		} catch (AssertionError e) {
 			System.out.println(e.getMessage());
+			Thread.sleep(3000);
 		}
 		return ActualText;
 	}
@@ -156,6 +157,11 @@ public class ForgotPasswordPage {
 	public void browserclose() {
 		driver.close();
 		driver.quit();
+	}
+
+	// Method to open new tab
+	public void opennewtab() {
+		driver.switchTo().newWindow(WindowType.TAB);
 	}
 
 }

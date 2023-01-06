@@ -31,8 +31,7 @@ public class LoginSteps {
 
 	// Code to enter the URL & go on to the login page
 	@And("^enters the URL address and check if the user is on login page$")
-	public void url_address_is_entered_and_checked_if_the_user_is_on_login_page(/* WebDriver WebDriver */)
-			throws InterruptedException {
+	public void url_address_is_entered_and_checked_if_the_user_is_on_login_page() throws InterruptedException {
 		String URL = "https://qa.sitenna.com";
 		launchbrowser.driver.get(URL);
 		login = new LoginPage(launchbrowser.driver);
@@ -49,30 +48,30 @@ public class LoginSteps {
 		Thread.sleep(3000);
 	}
 
-	// Code to click on the login button
-	@And("^clicks on login button$")
-	public void clicks_on_login_button() throws InterruptedException {
-		login.clickLogin();
-		Thread.sleep(3000);
-	}
-
-	@Then("^check (.+) and (.+) entered are valid or not$")
-	public void check_and_entered_are_valid_or_not(String Email, String Password) {
-		validatecredentials = new ValidInvalidCredential();
-		validatecredentials.isCredentialValidInvalid(Email, Password);
-	}
-
+	// Code to check credentials are valid
 	@Given("^credentials entered are valid$")
 	public void credentials_entered_are_valid() {
 		validatecredentials.isCredentialValid();
 	}
 
+	@And("^clicks on login button and check (.+) and (.+) entered are valid or not$")
+	public void clicks_on_login_button_and_check_and_entered_are_valid_or_not(String Email, String Password)
+			throws InterruptedException {
+		login.clickLogin();
+		Thread.sleep(3000);
+		validatecredentials = new ValidInvalidCredential();
+		validatecredentials.isCredentialValidInvalid(Email, Password);
+		Thread.sleep(3000);
+	}
+
+	// Code to display login success message
 	@Then("^login success message should be displayed$")
 	public void login_success_message_should_be_displayed() throws InterruptedException {
 		login.loginsuccess();
 		Thread.sleep(3000);
 	}
 
+	// Code to navigate on the dashboard
 	@And("^user should be navigated to the dashboard$")
 	public void user_should_be_navigated_to_the_dashboard() throws InterruptedException {
 		login.dashboardhighlighted();
@@ -85,11 +84,13 @@ public class LoginSteps {
 		login.browserclose();
 	}
 
+	// Code to check credentials are invalid
 	@Given("^credentials entered are invalid$")
 	public void credentials_entered_are_invalid() {
 		validatecredentials.isCredentialInvalid();
 	}
 
+	// Code to display login error message
 	@Then("^login error message should be displayed$")
 	public void login_error_message_should_be_displayed() throws InterruptedException {
 		login.loginerror();

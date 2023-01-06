@@ -4,8 +4,7 @@ Feature: To test the login functionality
     Given user launches a browser
     And enters the URL address and check if the user is on login page
     When user enters <Email> and <Password>
-    And clicks on login button
-    Then check <Email> and <Password> entered are valid or not
+    And clicks on login button and check <Email> and <Password> entered are valid or not
     Given credentials entered are valid
     Then login success message should be displayed
     And user should be navigated to the dashboard
@@ -19,8 +18,7 @@ Feature: To test the login functionality
     Given user launches a browser
     And enters the URL address and check if the user is on login page
     When user enters <Email> and <Password>
-    And clicks on login button
-    Then check <Email> and <Password> entered are valid or not
+    And clicks on login button and check <Email> and <Password> entered are valid or not
     Given credentials entered are invalid
     Then login error message should be displayed
     And browser gets closed
