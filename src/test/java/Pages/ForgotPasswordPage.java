@@ -163,5 +163,4 @@ public class ForgotPasswordPage {
 	public void opennewtab() {
 		driver.switchTo().newWindow(WindowType.TAB);
 	}
-
 }
