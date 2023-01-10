@@ -2,7 +2,6 @@ package StepDefinitions;
 
 import org.openqa.selenium.WebDriver;
 
-import Pages.ForgotPasswordPage;
 import Pages.LoginPage;
 import Util.BrowserLaunch;
 import Util.ValidInvalidCredential;
@@ -97,3 +96,4 @@ public class LoginSteps {
 		Thread.sleep(3000);
 	}
 }
+
