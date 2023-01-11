@@ -1,5 +1,9 @@
 package StepDefinitions;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;  
 import org.openqa.selenium.WebDriver;
 import Pages.ForgotPasswordPage;
 import Pages.LoginPage;
@@ -17,8 +21,8 @@ public class ForgotPasswordSteps {
 	ValidateLoginPage validateloginpage;
 	LoginPage login;
 
-	WebDriver driver;
-
+	public WebDriver driver;
+	
 	// Code to launch browser
 	@Given("^browser is launched$")
 	public void browser_is_launched() throws InterruptedException {
@@ -54,6 +58,7 @@ public class ForgotPasswordSteps {
 		Thread.sleep(3000);
 	}
 
+	// Code to click on reset password button & check the message for checking the mail
 	@And("^clicks on Reset Password button and message should be displayed to check the mail$")
 	public void clicks_on_reset_password_button_and_message_should_be_displayed_to_check_the_mail()
 			throws InterruptedException {
@@ -61,29 +66,33 @@ public class ForgotPasswordSteps {
 		Thread.sleep(5000);
 	}
 
+	// Code to open a URL in a new tab
+	@Given("^a new tab is opened and mail URL address is entered$")
+    public void a_new_tab_is_opened_and_mail_url_address_is_entered() throws AWTException {
+		Robot robot = new Robot();  
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_T); 
+		robot.keyRelease(KeyEvent.VK_CONTROL); 
+		robot.keyRelease(KeyEvent.VK_T);
+		
+		//Switch focus to new tab	
+		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(1));
+		driver.get("https://www.mailinator.com/");	
+	}
+	
 	/*
-	 * // Code to open a new tab
+	 * // Code to enter the mail id and click on go button
 	 * 
-	 * @Given("^a new tab is opened$") public void a_new_tab_is_opened() {
-	 * forgotpassword.opennewtab(); }
+	 * @When("^user enters (.+) and clicks on Go button$") public void
+	 * user_enters_and_clicks_on_go_button(String Mail_Email) {
+	 * forgotpassword.mailsearch(Mail_Email); }
 	 * 
-	 * // Code to enter the mail URL
-	 * 
-	 * @And("^mail URL address is entered$") public void
-	 * mail_url_address_is_entered() { String URL = "https://www.mailinator.com/";
-	 * driver.get(URL); }
 	 * 
 	 * // Code to fetch the mail and open it
 	 * 
 	 * @Given("^user fetches and opens the mail with Subject Reset Password$")
 	 * public void user_fetches_and_opens_the_mail_with_subject_reset_password() {
-	 * 
-	 * }
-	 * 
-	 * // Code to enter the mail id and click on go button
-	 * 
-	 * @When("^user enters (.+) and clicks on Go button$") public void
-	 * user_enters_and_clicks_on_go_button(String mailemail) {
 	 * 
 	 * }
 	 * 
@@ -164,4 +173,5 @@ public class ForgotPasswordSteps {
 	 * @And("^browser is closed$") public void browser_is_closed() {
 	 * forgotpassword.browserclose(); }
 	 */
+	 
 }

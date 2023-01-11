@@ -3,7 +3,6 @@ package Pages;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WindowType;
 
 public class ForgotPasswordPage {
 
@@ -23,6 +22,8 @@ public class ForgotPasswordPage {
 	By loginsuccessmessage = By.xpath("//notifier-container[@class = 'notifier__container']");
 	By dashboard = By.xpath("//*[@id=\"dashboard_menu_item\"]");
 	By checkmailsuccessmessage = By.xpath("//notifier-container[@class = 'notifier__container']");
+	By email = By.id("search");
+	By go = By.name("GO");
 
 	// Constructor to initialize driver
 	public ForgotPasswordPage(WebDriver driver) {
@@ -35,8 +36,7 @@ public class ForgotPasswordPage {
 		Thread.sleep(3000);
 	}
 
-	// Method to click forgot password link and check user is on forgot password
-	// page or not
+	// Method to click forgot password link and check user is on forgot password page or not
 	public String validateforgotpasswordpage() throws InterruptedException {
 		driver.findElement(forgotpassword_link).click();
 		Thread.sleep(3000);
@@ -158,9 +158,13 @@ public class ForgotPasswordPage {
 		driver.close();
 		driver.quit();
 	}
+	
+   /*
+	 * // Method to enter mailinator email id & click on GO button public void
+	 * mailsearch(String Mail_Email) {
+	 * driver.findElement(email).sendKeys(Mail_Email);
+	 * driver.findElement(go).click(); }
+	 */
 
-	// Method to open new tab
-	public void opennewtab() {
-		driver.switchTo().newWindow(WindowType.TAB);
-	}
+	
 }

@@ -10,3 +10,11 @@ Feature: To test the forgot password functionality
     Examples: 
       | Email                 |
       | aneesh@mailinator.com |
+
+  Scenario Outline: To open mailinator in new tab and click on Create New Password button
+    Given a new tab is opened and mail URL address is entered
+    When user enters <Mail_Email> and clicks on Go button
+    
+    Examples: 
+      | Mail_Email            |
+      | aneesh@mailinator.com |
