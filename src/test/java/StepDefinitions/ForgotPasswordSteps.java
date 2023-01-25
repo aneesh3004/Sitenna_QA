@@ -10,6 +10,7 @@ import Pages.PageObjectManager;
 import Util.GenericUtils;
 import Util.TestContxtSetup;
 import Util.Testbase;
+import Util.ValidInvalidCredential;
 import Util.ValidateLoginPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -22,9 +23,10 @@ public class ForgotPasswordSteps {
 	Testbase testbase;
 	PageObjectManager pageobjectmanager;
 	GenericUtils genericutils;
-	ForgotPasswordPage forgotpassword;
+	LoginPage login;
+	ValidInvalidCredential validatecredentials;
 	ValidateLoginPage validateloginpage;
-	LoginPage login;	
+	ForgotPasswordPage forgotpassword;
 	
 	public ForgotPasswordSteps(TestContxtSetup testContxtSetup) {
 		this.testContxtSetup = testContxtSetup;
@@ -40,11 +42,8 @@ public class ForgotPasswordSteps {
 
 	// Code to enter the URL & go on to the login page
 	@And("^URL address is entered and checked if the user is on login page$")
-	public void url_address_is_entered_and_checked_if_the_user_is_on_login_page() throws InterruptedException {
-		String URL = "https://qa.sitenna.com";
-		testbase.driver.get(URL);
-		forgotpassword = new ForgotPasswordPage(testbase.driver);
-		validateloginpage = new ValidateLoginPage();
+	public void url_address_is_entered_and_checked_if_the_user_is_on_login_page() throws InterruptedException, AWTException {
+		login.fetchURL();
 		validateloginpage.validateloginpage();
 		Thread.sleep(2000);
 	}
