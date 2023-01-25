@@ -8,8 +8,7 @@ Feature: To test the login functionality
     Given credentials entered are valid
     Then login success message should be displayed
     And user should be navigated to the dashboard
-    And browser gets closed
-
+    
     Examples: 
       | Email                 | Password      |
       | aneesh.vyas@xotiv.com | Password@1981 |
@@ -20,8 +19,7 @@ Feature: To test the login functionality
     When user enters <Email> and <Password>
     And clicks on login button and check <Email> and <Password> entered are valid or not
     Given credentials entered are invalid
-    Then login error message should be displayed
-    And browser gets closed
+    Then login error message should be displayed    
 
     Examples: 
       | Email                  | Password      |
