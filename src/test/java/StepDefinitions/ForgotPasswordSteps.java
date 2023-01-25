@@ -3,11 +3,13 @@ package StepDefinitions;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;  
-import org.openqa.selenium.WebDriver;
+import java.io.IOException;
 import Pages.ForgotPasswordPage;
 import Pages.LoginPage;
-import Util.BrowserLaunch;
+import Pages.PageObjectManager;
+import Util.GenericUtils;
+import Util.TestContxtSetup;
+import Util.Testbase;
 import Util.ValidateLoginPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -16,18 +18,23 @@ import io.cucumber.java.en.When;
 
 public class ForgotPasswordSteps {
 
-	BrowserLaunch launchbrowser;
+	TestContxtSetup testContxtSetup;
+	Testbase testbase;
+	PageObjectManager pageobjectmanager;
+	GenericUtils genericutils;
 	ForgotPasswordPage forgotpassword;
 	ValidateLoginPage validateloginpage;
-	LoginPage login;
-
-	public WebDriver driver;
+	LoginPage login;	
 	
+	public ForgotPasswordSteps(TestContxtSetup testContxtSetup) {
+		this.testContxtSetup = testContxtSetup;
+		this.forgotpassword = testContxtSetup.pageobjectmanager.getForgotPasswordPage();
+	}
 	// Code to launch browser
 	@Given("^browser is launched$")
-	public void browser_is_launched() throws InterruptedException {
-		launchbrowser = new BrowserLaunch();
-		launchbrowser.browserlaunch();
+	public void browser_is_launched() throws IOException, InterruptedException {
+		testbase = new Testbase();
+		testbase.WebDriverManager();
 		Thread.sleep(3000);
 	}
 
@@ -35,15 +42,14 @@ public class ForgotPasswordSteps {
 	@And("^URL address is entered and checked if the user is on login page$")
 	public void url_address_is_entered_and_checked_if_the_user_is_on_login_page() throws InterruptedException {
 		String URL = "https://qa.sitenna.com";
-		launchbrowser.driver.get(URL);
-		forgotpassword = new ForgotPasswordPage(launchbrowser.driver);
+		testbase.driver.get(URL);
+		forgotpassword = new ForgotPasswordPage(testbase.driver);
 		validateloginpage = new ValidateLoginPage();
-		validateloginpage.validateloginpage(launchbrowser.driver);
+		validateloginpage.validateloginpage();
 		Thread.sleep(2000);
 	}
 
-	// Code to click on forgot password link and check if user is on forgot password
-	// page
+	// Code to click on forgot password link and check if user is on forgot password page
 	@Then("^user clicks on the Forgot Password link and check if the user is on forgot password page$")
 	public void user_clicks_on_the_forgot_password_link_and_check_if_the_user_is_on_forgot_password_page()
 			throws InterruptedException {
@@ -52,7 +58,7 @@ public class ForgotPasswordSteps {
 	}
 
 	// Code to enter email
-	@When("^user enters the (.+)$")
+	@When("^user fills the (.+)$")
 	public void user_enters_the(String Email) throws InterruptedException {
 		forgotpassword.resetpasswordemail(Email);
 		Thread.sleep(3000);
@@ -60,31 +66,35 @@ public class ForgotPasswordSteps {
 
 	// Code to click on reset password button & check the message for checking the mail
 	@And("^clicks on Reset Password button and message should be displayed to check the mail$")
-	public void clicks_on_reset_password_button_and_message_should_be_displayed_to_check_the_mail()
-			throws InterruptedException {
+	public void clicks_on_reset_password_button_and_message_should_be_displayed_to_check_the_mail() throws InterruptedException {
 		forgotpassword.checkmailsuccess();
 		Thread.sleep(5000);
 	}
 
-	// Code to open a URL in a new tab
-	@Given("^a new tab is opened and mail URL address is entered$")
-    public void a_new_tab_is_opened_and_mail_url_address_is_entered() throws AWTException {
-		Robot robot = new Robot();  
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_T); 
-		robot.keyRelease(KeyEvent.VK_CONTROL); 
-		robot.keyRelease(KeyEvent.VK_T);
-		
-		//Switch focus to new tab	
-		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
-		driver.switchTo().window(tabs.get(1));
-		driver.get("https://www.mailinator.com/");	
-	}
+	
+	 // Code to open a URL in a new tab	  
+	 @Given("^a new tab is opened and mail URL address is entered$") 
+	 public void a_new_tab_is_opened_and_mail_url_address_is_entered() throws AWTException,InterruptedException { 
+		 Robot robot = new Robot();
+	     robot.keyPress(KeyEvent.VK_CONTROL); 
+	     robot.keyPress(KeyEvent.VK_T);
+	     robot.keyRelease(KeyEvent.VK_CONTROL); 
+	     robot.keyRelease(KeyEvent.VK_T);
+	     Thread.sleep(3000);
+	     
+	    //Switch focus to new tab
+		/*
+		 * ArrayList<String> tabs = new ArrayList<String>
+		 * (launchbrowser.driver.getWindowHandles());
+		 * launchbrowser.driver.switchTo().window(tabs.get(1));
+		 * driver.get("https://www.mailinator.com/");
+		 */
+	}	 
 	
 	/*
 	 * // Code to enter the mail id and click on go button
 	 * 
-	 * @When("^user enters (.+) and clicks on Go button$") public void
+	 * @When("^user fills (.+) and clicks on Go button$") public void
 	 * user_enters_and_clicks_on_go_button(String Mail_Email) {
 	 * forgotpassword.mailsearch(Mail_Email); }
 	 * 

@@ -1,20 +1,24 @@
 package Util;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
 public class ValidateLoginPage {
-
-	public String validateloginpage(WebDriver driver) {
+	
+	public WebDriver driver;
+	TestContxtSetup testContxtSetup;
+	ValidateLoginPage validateloginpage;
+	
+	public ValidateLoginPage(WebDriver driver) {
+		this.driver = driver;
+	}
+	
+	public void validateloginpage() {
 		String ActualURL = driver.getCurrentUrl();
 		String ExpectedURL = "https://qa.sitenna.com/#/auth/signin";
-		try {
-			Assert.assertEquals(ExpectedURL, ActualURL);
-			System.out.println("User is on login page");
-		} catch (AssertionError e) {
-			System.out.println(e.getMessage());
+		if (ActualURL.equals(ExpectedURL)) {
+			System.out.println("User is on login page: " +ActualURL);
+		} else { 
 			System.out.println("User is not on login page");
-		}
-		return ActualURL;
+		}		
 	}
 }

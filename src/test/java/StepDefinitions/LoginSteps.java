@@ -1,9 +1,15 @@
 package StepDefinitions;
 
+import java.awt.AWTException;
+import java.io.IOException;
+
 import org.openqa.selenium.WebDriver;
 
+import Pages.PageObjectManager;
 import Pages.LoginPage;
-import Util.BrowserLaunch;
+import Util.GenericUtils;
+import Util.TestContxtSetup;
+import Util.Testbase;
 import Util.ValidInvalidCredential;
 import Util.ValidateLoginPage;
 import io.cucumber.java.en.And;
@@ -13,61 +19,59 @@ import io.cucumber.java.en.When;
 
 public class LoginSteps {
 
-	BrowserLaunch launchbrowser;
+	TestContxtSetup testContxtSetup;
+	Testbase testbase;
+	PageObjectManager pageobjectmanager;
+	GenericUtils genericutils;
 	LoginPage login;
 	ValidInvalidCredential validatecredentials;
 	ValidateLoginPage validateloginpage;
-
-	WebDriver driver;
+	
+	
+	public LoginSteps(TestContxtSetup testContxtSetup) {
+		this.testContxtSetup = testContxtSetup;
+		this.login = testContxtSetup.pageobjectmanager.getLoginPage();
+	}
 
 	// Code to launch the browser
 	@Given("^user launches a browser$")
-	public void user_launches_a_browser() throws InterruptedException {
-		launchbrowser = new BrowserLaunch();
-		launchbrowser.browserlaunch();
-		Thread.sleep(3000);
+	public void user_launches_a_browser() throws IOException, InterruptedException {
 	}
 
 	// Code to enter the URL & go on to the login page
 	@And("^enters the URL address and check if the user is on login page$")
-	public void url_address_is_entered_and_checked_if_the_user_is_on_login_page() throws InterruptedException {
-		String URL = "https://qa.sitenna.com";
-		launchbrowser.driver.get(URL);
-		login = new LoginPage(launchbrowser.driver);
-		validateloginpage = new ValidateLoginPage();
-		validateloginpage.validateloginpage(launchbrowser.driver);
+	public void url_address_is_entered_and_checked_if_the_user_is_on_login_page(WebDriver driver) throws InterruptedException, AWTException {
+		login.fetchURL();
+		validateloginpage.validateloginpage();
 		Thread.sleep(2000);
 	}
 
 	// Code to enter email id & password
 	@When("^user enters (.+) and (.+)$")
-	public void user_enters_Email_and_Password(String Email, String Password) throws InterruptedException {
+	public void user_enters_Email_and_Password(String Email, String Password) throws IOException {
 		login.enterEmail(Email);
 		login.enterPassword(Password);
-		Thread.sleep(3000);
 	}
 
 	// Code to check credentials are valid
 	@Given("^credentials entered are valid$")
-	public void credentials_entered_are_valid() {
+	public void credentials_entered_are_valid() throws IOException {
 		validatecredentials.isCredentialValid();
 	}
 
 	@And("^clicks on login button and check (.+) and (.+) entered are valid or not$")
 	public void clicks_on_login_button_and_check_and_entered_are_valid_or_not(String Email, String Password)
-			throws InterruptedException {
+			throws IOException {
 		login.clickLogin();
-		Thread.sleep(3000);
 		validatecredentials = new ValidInvalidCredential();
-		validatecredentials.isCredentialValidInvalid(Email, Password);
-		Thread.sleep(3000);
+		validatecredentials.isCredentialValidInvalid(Email, Password);		
 	}
 
 	// Code to display login success message
 	@Then("^login success message should be displayed$")
 	public void login_success_message_should_be_displayed() throws InterruptedException {
 		login.loginsuccess();
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 	}
 
 	// Code to navigate on the dashboard
@@ -77,15 +81,9 @@ public class LoginSteps {
 		Thread.sleep(5000);
 	}
 
-	// Code to close the browser
-	@And("^browser gets closed$")
-	public void browser_gets_closed() {
-		login.browserclose();
-	}
-
 	// Code to check credentials are invalid
 	@Given("^credentials entered are invalid$")
-	public void credentials_entered_are_invalid() {
+	public void credentials_entered_are_invalid() throws IOException {
 		validatecredentials.isCredentialInvalid();
 	}
 
@@ -93,7 +91,6 @@ public class LoginSteps {
 	@Then("^login error message should be displayed$")
 	public void login_error_message_should_be_displayed() throws InterruptedException {
 		login.loginerror();
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 	}
 }
-

@@ -112,7 +112,7 @@ public class ForgotPasswordPage {
 	// Method for check mail success message
 	public String checkmailsuccess() throws InterruptedException {
 		driver.findElement(resetpassword_btn).click();
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		String ActualText = driver.findElement(checkmailsuccessmessage).getText();
 		System.out.println("Message: " + ActualText);
 		String ExpectedText = "Please check mail for reset password";
@@ -120,7 +120,7 @@ public class ForgotPasswordPage {
 			Assert.assertEquals(ExpectedText, ActualText);
 		} catch (AssertionError e) {
 			System.out.println(e.getMessage());
-			Thread.sleep(3000);
+			Thread.sleep(5000);
 		}
 		return ActualText;
 	}
