@@ -2,9 +2,6 @@ package StepDefinitions;
 
 import java.awt.AWTException;
 import java.io.IOException;
-
-import org.openqa.selenium.WebDriver;
-
 import Pages.PageObjectManager;
 import Pages.LoginPage;
 import Util.GenericUtils;
@@ -25,7 +22,7 @@ public class LoginSteps {
 	GenericUtils genericutils;
 	LoginPage login;
 	ValidInvalidCredential validatecredentials;
-	ValidateLoginPage validateloginpage;
+	ValidateLoginPage validatelogin;
 	
 	
 	public LoginSteps(TestContxtSetup testContxtSetup) {
@@ -40,9 +37,9 @@ public class LoginSteps {
 
 	// Code to enter the URL & go on to the login page
 	@And("^enters the URL address and check if the user is on login page$")
-	public void url_address_is_entered_and_checked_if_the_user_is_on_login_page(WebDriver driver) throws InterruptedException, AWTException {
+	public void url_address_is_entered_and_checked_if_the_user_is_on_login_page() throws InterruptedException, AWTException {
 		login.fetchURL();
-		validateloginpage.validateloginpage();
+		validatelogin.validateloginpage();
 		Thread.sleep(2000);
 	}
 
