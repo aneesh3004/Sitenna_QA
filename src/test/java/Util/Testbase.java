@@ -11,17 +11,16 @@ import org.openqa.selenium.interactions.Actions;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Testbase {
-	
+
 	public WebDriver driver;
-	
+
 	public WebDriver WebDriverManager() throws IOException {
 		String projectpath = System.getProperty("user.dir"); // generating dynamic project path
-		FileInputStream fis = new FileInputStream(projectpath + "/src/test/resources/Global.properties"); 
+		FileInputStream fis = new FileInputStream(projectpath + "/src/test/resources/Global.properties");
 		Properties prop = new Properties(); // it's use to read the .properties file
 		prop.load(fis);// loading the .properties file
 		String URL = prop.getProperty("sitennaurl");
 		if (driver == null) {
-			//System.setProperty("webdriver.chrome.driver", projectpath + "/src/test/resources/Driver/chromedriver.exe");
 			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();// from here driver variable get life to invoke the chrome browser
 			driver.manage().window().maximize();

@@ -6,7 +6,7 @@ public class ValidateLoginPage {
 	
 	public WebDriver driver;
 	TestContxtSetup testContxtSetup;
-	ValidateLoginPage validateloginpage;
+	ValidateLoginPage validatelogin;
 	
 	public ValidateLoginPage(WebDriver driver) {
 		this.driver = driver;

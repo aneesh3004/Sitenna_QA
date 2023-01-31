@@ -54,7 +54,5 @@ public class Hooks {
 				"//*[/html/body/app-root/div[1]/app-home/div/mat-drawer-container/mat-drawer/div/div/ul[2]/li[2]/a]")).click();	
 		testContxtSetup.testbase.WebDriverManager().findElement(By.linkText("Logout")).click();
 		Thread.sleep(3000);
-
 	}
-
 }

@@ -94,8 +94,8 @@ public class LoginPage {
 		driver.get(URL);
 		System.out.println(URL);
 		Robot robot = new Robot();
-	     robot.keyPress(KeyEvent.VK_ENTER); 
-	     robot.keyRelease(KeyEvent.VK_ENTER); 
-	     System.out.println(driver.getCurrentUrl());	     
+		robot.keyPress(KeyEvent.VK_ENTER);
+	    robot.keyRelease(KeyEvent.VK_ENTER); 
+	    System.out.println(driver.getCurrentUrl());	     
 	}
 }
