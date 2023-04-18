@@ -40,14 +40,6 @@ public class ForgotPasswordSteps {
 		Thread.sleep(3000);
 	}
 
-	// Code to enter the URL & go on to the login page
-	@And("^URL address is entered and checked if the user is on login page$")
-	public void url_address_is_entered_and_checked_if_the_user_is_on_login_page() throws InterruptedException, AWTException {
-		login.fetchURL();
-		validateloginpage.validateloginpage();
-		Thread.sleep(2000);
-	}
-
 	// Code to click on forgot password link and check if user is on forgot password page
 	@Then("^user clicks on the Forgot Password link and check if the user is on forgot password page$")
 	public void user_clicks_on_the_forgot_password_link_and_check_if_the_user_is_on_forgot_password_page()

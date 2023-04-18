@@ -1,8 +1,5 @@
 package PageElements;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -86,16 +83,5 @@ public class LoginPage {
 			System.out.println(e.getMessage());
 		}
 		return ActualText;
-	}	
-	
-	// Method to enter the URL
-	public void fetchURL() throws AWTException {
-		String URL = "https://qa.sitenna.com";
-		driver.get(URL);
-		System.out.println(URL);
-		Robot robot = new Robot();
-		robot.keyPress(KeyEvent.VK_ENTER);
-	    robot.keyRelease(KeyEvent.VK_ENTER); 
-	    System.out.println(driver.getCurrentUrl());	     
-	}
+	}		
 }
