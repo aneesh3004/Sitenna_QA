@@ -33,7 +33,7 @@ public class TestBase {
 			DesiredCapabilities capabilities = new DesiredCapabilities();
 			capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 			options.merge(capabilities);
-		   driver = new ChromeDriver(options);
+		    driver = new ChromeDriver(options);
 			driver.manage().window().maximize();
 			driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(120));
 			driver.get(URL);

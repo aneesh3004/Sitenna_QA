@@ -13,11 +13,11 @@ public class ValidInvalidCredential {
 		String EmailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 		Pattern pat = Pattern.compile(EmailRegex);
 		result = pat.matcher(Email).matches();
-		System.out.println(result);
+		System.out.println("Email entered is vald:" +result);
 		String PasswordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[_@#$%^&+=])(?=\\S+$).(8,)$";
 		Pattern p = Pattern.compile(PasswordRegex);
 		res = p.matcher(Password).matches();
-		System.out.println(res);
+		System.out.println("Password entered is valid:" +res);
 	}
 
 	// Method to check credentials are valid

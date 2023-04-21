@@ -51,7 +51,7 @@ public class LoginPage {
 	// Method to click on login button
 	public void clickLogin() throws IOException {		
 		genutils.waitForWebelementToAppear(driver,login_btn);
-		login_btn.click();		
+		login_btn.click();	
 	}
 
 	// Method to print login success message
